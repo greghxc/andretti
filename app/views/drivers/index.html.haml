@@ -1,0 +1,54 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=320, initial-scale=1, user-scalable=no", :name => "viewport"}/
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.1/css/bulma.css", :rel => "stylesheet"}/
+    %script{:crossorigin => "anonymous", :integrity => "sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=", :src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+    %title Driver Page
+  %body
+    .section
+      %nav.level.is-mobile
+        %p.level-item.has-text-left
+          %strong #{@driver['name']}
+        %p.level-item.has-text-right
+          %a.link.is-info.reload Refresh
+      - if @reservations.empty?
+        %p.level-item.has-text-centered
+          = render 'message'
+      - else
+        - @reservations.each do |reservation|
+          = render 'reservation', reservation: reservation
+      %nav.level.is-mobile
+        %p.level-item.has-text-centered
+          %a.link.is-info.terms-and-conditions Terms and Conditions
+    = render 'terms'
+    = render 'timeout'
+    :javascript
+      $(document).ready(function() {
+        $('.card-header').click(function(){
+          $(this).parents('.card').find('.card-content').slideToggle();
+        });
+
+        $('select').on('change', function() {
+          if ($(this).val() === 'No') {
+            $(this).parents('.content').find('.wait-detail').slideUp();
+          } else {
+            $(this).parents('.content').find('.wait-detail').slideDown();
+          }
+        });
+
+        $('.reload').on('click', function() {
+          location.reload();
+        });
+
+        $('a.terms-and-conditions').on('click', function() {
+          $('div.terms-and-conditions').addClass('is-active');
+        });
+
+        $('a.close-modal').on('click', function() {
+          $(this).parents('.modal').removeClass('is-active');
+        });
+
+        setTimeout(function(){ $('.timed-out').addClass('is-active'); }, 60000)
+      });

@@ -1,0 +1,46 @@
+.level
+  .card.is-fullwidth
+    %header.card-header.is-primary{:style => "background-color: #333333"}
+      %p.card-header-title{:style => "color: white; text-align: center;"}
+        SAT 09/25/16 11:25 PM
+    .card-content{:style => "display: none;"}
+      .content
+        %label.label Reservation #
+        %p.control
+          = reservation['res_num']
+        %label.label Vehicle Type
+        %p.control
+          = reservation['res_veh_type']
+        %label.label Client Name
+        %p.control
+          = reservation['res_contact']
+        %label.label Client Phone
+        %p.control
+          = reservation['anon_num'] || 'Not Yet Assigned'
+        %label.label Pickup Address
+        %p.control
+          = reservation['res_pick']
+        %label.label Dropoff Address
+        %p.control
+          = reservation['res_drop']
+        %label.label Notes
+        %p.control
+          = reservation['res_notes']
+        %label.label Base Charge
+        %p.control
+          = '$' + reservation['res_price']
+        %label.label Pre-Paid
+        %p.control
+          = reservation['res_prepaid'] != '0' ? 'Yes' : 'No'
+        %label.label Additional Stops / Fees
+        %p.control
+          %span.select.is-fullwidth
+            %select
+              %option No
+              %option Yes (Provide Details)
+        %label.label.wait-detail 
+          Details
+        %p.control.wait-detail
+          %textarea.textarea{:placeholder => "Textarea"}
+        %p.control
+          %button.button.is-primary.is-fullwidth Driver On-Site
