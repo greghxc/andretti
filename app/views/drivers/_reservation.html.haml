@@ -1,4 +1,4 @@
-- needs_conf = !reservation['reconfirmed'] && reservation['res_datetime'] > Time.now + (12*60*60)
+- needs_conf = !reservation['reconfirmed'] && reservation['res_datetime'] < Time.now + (12*60*60)
 - header_color = needs_conf ? '#ffdd57' : '#333333'
 .level
   .card.is-fullwidth
