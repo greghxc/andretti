@@ -1,0 +1,9 @@
+.level
+  .card.is-fullwidth
+    %header.card-header.is-primary{:style => "background-color: #ff3860"}
+      %p.card-header-title{:style => "color: white; text-align: center;"}
+        = DateTime.parse(reservation['res_datetime']).strftime("CANCELED: %^a %-m/%-d/%Y %l:%M %p")
+    .card-content{:style => "display: none;"}
+      .content
+        %p.has-text-centered
+          Reservation ##{ reservation['res_num'] } has been cancelled by the passenger.

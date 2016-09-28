@@ -2,7 +2,7 @@
   .card.is-fullwidth
     %header.card-header.is-primary{:style => "background-color: #333333"}
       %p.card-header-title{:style => "color: white; text-align: center;"}
-        SAT 09/25/16 11:25 PM
+        = DateTime.parse(reservation['res_datetime']).strftime("%^a %-m/%-d/%Y %l:%M %p")
     .card-content{:style => "display: none;"}
       .content
         %label.label Reservation #
