@@ -5,7 +5,7 @@ class Driver
   include HTTParty
 
   def base_path
-    "/aces/acestowncarservice.com/acesver3/API/resources/reservation/"
+    "/acesver3/API/resources/reservation/"
   end
 
   def info_for(driver)

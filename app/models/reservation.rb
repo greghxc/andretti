@@ -5,7 +5,7 @@ class Reservation
   # base_uri 'localhost:8000'
 
   def base_path
-    "/aces/acestowncarservice.com/acesver3/API/resources/reservation/"
+    "/acesver3/API/resources/reservation/"
   end
 
   def list_by_driver(driver)
