@@ -1,6 +1,8 @@
+- needs_conf = !reservation['reconfirmed'] && reservation['res_datetime'] > Time.now + (12*60*60)
+- header_color = needs_conf ? '#ffdd57' : '#333333'
 .level
   .card.is-fullwidth
-    %header.card-header.is-primary{:style => "background-color: #333333"}
+    %header.card-header.is-primary{:style => "background-color: #{ header_color }"}
       %p.card-header-title{:style => "color: white; text-align: center;"}
         = DateTime.parse(reservation['res_datetime']).strftime("%^a %-m/%-d/%Y %l:%M %p")
     .card-content{:style => "display: none;"}
@@ -32,15 +34,6 @@
         %label.label Pre-Paid
         %p.control
           = reservation['res_prepaid'] != '0' ? 'Yes' : 'No'
-        %label.label Additional Stops / Fees
-        %p.control
-          %span.select.is-fullwidth
-            %select
-              %option No
-              %option Yes (Provide Details)
-        %label.label.wait-detail 
-          Details
-        %p.control.wait-detail
-          %textarea.textarea{:placeholder => "Textarea"}
-        %p.control
-          %button.button.is-primary.is-fullwidth Driver On-Site
+        - if needs_conf
+          %p.control
+            %button.button.is-primary.is-fullwidth Reconfirm Reservation
