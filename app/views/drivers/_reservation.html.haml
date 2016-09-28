@@ -25,7 +25,7 @@
           = render 'flight_info', reservation: reservation
         %label.label Notes
         %p.control
-          = reservation['res_notes']
+          = reservation['res_notes'].html_safe
         %label.label Base Charge
         %p.control
           = '$' + reservation['res_price']
