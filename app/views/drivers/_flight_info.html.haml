@@ -1,0 +1,6 @@
+%label.label Flight Info
+%p.control
+  = p "#{reservation['res_airline']} #{reservation['res_flight']} #{reservation['res_depcity']}"
+%label.label Checked Baggage
+%p.control
+  = reservation['res_prepaid'] != '0' ? 'Yes' : 'No'
