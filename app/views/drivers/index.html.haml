@@ -29,6 +29,18 @@
     = render 'terms'
     = render 'timeout'
     :javascript
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(recordPosition);
+        } else {
+          $('input[name=latlong]').val('NONE');
+        }
+      }
+
+      function recordPosition(position) {
+        $('input[name=latlong]').val(position.coords.latitude + "," + position.coords.longitude);
+      }
+
       $(document).ready(function() {
         $('.card-header').click(function(){
           $(this).parents('.card').find('.card-content').slideToggle();
@@ -55,4 +67,15 @@
         });
 
         setTimeout(function(){ $('.timed-out').addClass('is-active'); }, 60000)
+      
+        $('.api').click( function(e){
+          e.preventDefault();
+          var frm = $(this).parents('form');
+          var dat = JSON.stringify(frm.serializeArray());
+          var url = '#{Rails.configuration.aces_legacy_api}/acesver3/API/resources/reservation/index.php';
+          if (frm.find('input[name="type"]').val() === 'driverOnSite') { getLocation(); }
+          $.post(url, dat, function(data) {
+            location.reload();
+          });
+        });
       });

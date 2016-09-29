@@ -1,0 +1,30 @@
+- if reservation['res_status'] == '3'
+  - if reservation['res_datetime'] < Time.now + (12*60*60)
+    - if reservation['reconfirmed'].blank?
+      %input{:type => 'hidden', :name => 'type', :value => 'reconfirmFarmed'}
+      %input{:type => 'hidden', :name => 'latlong'}
+      %p.control
+        %button.button.is-primary.is-fullwidth.api Reconfirm Reservation
+    - elsif reservation['res_datetime'] < Time.now + (15*60)
+      - if reservation['res_driver_on_site'].blank?
+        %input{:type => 'hidden', :name => 'type', :value => 'driverOnSite'}
+        %p.control
+          %button.button.is-primary.is-fullwidth.api Driver On-Site
+      - elsif reservation['res_passenger_in_car'].blank?
+        %input{:type => 'hidden', :name => 'type', :value => 'passengerInCar'}
+        %p.control
+          %button.button.is-primary.is-fullwidth.api Passenger In Car
+      - else
+        %input{:type => 'hidden', :name => 'type', :value => 'completeFarm'}
+        %label.label Additional Stops / Fees
+        %p.control
+          %span.select.is-fullwidth
+            %select
+              %option No
+              %option Yes (Provide Details)
+        %label.label.wait-detail 
+          Details
+        %p.control.wait-detail
+          %textarea.textarea{:name => 'conf_notes', :placeholder => 'Textarea'}
+        %p.control
+          %button.button.is-primary.is-fullwidth.api Complete Ride

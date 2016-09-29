@@ -1,34 +1,34 @@
 - needs_conf = !reservation['reconfirmed'] && reservation['res_datetime'] < Time.now + (12*60*60)
-- header_color = 1 == 2  ? '#ffdd57' : '#333333'
 .level
   .card.is-fullwidth
-    %header.card-header.is-primary{:style => "background-color: #{ header_color }"}
-      %p.card-header-title{:style => "color: white; text-align: center;"}
-        = DateTime.parse(reservation['res_datetime']).strftime("%^a %-m/%-d/%Y %l:%M %p")
-    .card-content{:style => "display: none;"}
-      .content
-        %label.label Reservation 
-        %p.control
-          = reservation['res_num']
-        %label.label Vehicle Type
-        %p.control
-          = reservation['res_veh_type']
-        - if reservation['res_datetime'] < Time.now + (2*60*60)
-          = render 'client_info', reservation: reservation
-        %label.label Pickup Address
-        %p.control
-          = reservation['res_pick']
-        %label.label Dropoff Address
-        %p.control
-          = reservation['res_drop']
-        - unless reservation['res_airline'].blank?
-          = render 'flight_info', reservation: reservation
-        %label.label Notes
-        %p.control
-          = reservation['res_notes'].html_safe
-        %label.label Base Charge
-        %p.control
-          = '$' + reservation['res_price']
-        %label.label Pre-Paid
-        %p.control
-          = reservation['res_prepaid'] != '0' ? 'Yes' : 'No'
+    = render 'reservation_header', reservation: reservation
+    %form
+      %input{:type => 'hidden', :name => 'res_num', :value => reservation['res_num']}
+      .card-content{:style => "display: none;"}
+        .content
+          %label.label Reservation 
+          %p.control
+            = reservation['res_num']
+          %label.label Vehicle Type
+          %p.control
+            = reservation['res_veh_type']
+          - if reservation['res_datetime'] < Time.now + (2*60*60)
+            = render 'client_info', reservation: reservation
+          %label.label Pickup Address
+          %p.control
+            = reservation['res_pick']
+          %label.label Dropoff Address
+          %p.control
+            = reservation['res_drop']
+          - unless reservation['res_airline'].blank?
+            = render 'flight_info', reservation: reservation
+          %label.label Notes
+          %p.control
+            = reservation['res_notes'].html_safe
+          %label.label Base Charge
+          %p.control
+            = '$' + reservation['res_price']
+          %label.label Pre-Paid
+          %p.control
+            = reservation['res_prepaid'] != '0' ? 'Yes' : 'No'
+          = render 'actions', reservation: reservation
