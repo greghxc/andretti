@@ -1,5 +1,5 @@
 - if reservation['res_status'] == '3'
-  - if reservation['res_datetime'] < Time.now + (12*60*60)
+  - if reservation['res_datetime'] < Time.now.getlocal + (12*60*60)
     - if reservation['reconfirmed'].blank?
       %input{:type => 'hidden', :name => 'type', :value => 'reconfirmFarmed'}
       %input{:type => 'hidden', :name => 'latlong'}
