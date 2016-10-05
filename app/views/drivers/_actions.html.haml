@@ -5,7 +5,7 @@
       %input{:type => 'hidden', :name => 'latlong'}
       %p.control
         %button.button.is-primary.is-fullwidth.api Reconfirm Reservation
-    - elsif reservation['res_datetime'] < Time.now + (15*60)
+    - elsif reservation['res_datetime'] < Time.now.getlocal + (15*60)
       - if reservation['res_driver_on_site'].blank?
         %input{:type => 'hidden', :name => 'type', :value => 'driverOnSite'}
         %p.control
