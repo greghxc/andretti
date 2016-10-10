@@ -19,7 +19,7 @@
           = render 'message'
       - else
         - @reservations.each do |reservation|
-          - if reservation['res_status'] == '3'
+          - if reservation['res_status'] == '3' && reservation['is_cancelled'] == '0'
             = render 'reservation', reservation: reservation
           - else
             = render 'canceled_reservation', reservation: reservation
