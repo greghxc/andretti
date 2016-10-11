@@ -1,11 +1,12 @@
+- res_datetime = Time.parse(reservation['res_datetime'])
 - if reservation['res_status'] == '3'
-  - if reservation['res_datetime'] < Time.now.getlocal + (12*60*60)
+  - if res_datetime < Time.now.getlocal + (12*60*60)
     - if reservation['reconfirmed'].blank?
       %input{:type => 'hidden', :name => 'type', :value => 'reconfirmFarmed'}
       %input{:type => 'hidden', :name => 'latlong'}
       %p.control
         %button.button.is-primary.is-fullwidth.api Reconfirm Reservation
-    - elsif reservation['res_datetime'] < Time.now.getlocal + (15*60)
+    - elsif res_datetime < Time.now.getlocal + (15*60)
       - if reservation['res_driver_on_site'].blank?
         %input{:type => 'hidden', :name => 'type', :value => 'driverOnSite'}
         %p.control

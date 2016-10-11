@@ -1,4 +1,5 @@
-- needs_conf = !reservation['reconfirmed'] && reservation['res_datetime'] < Time.now + (12*60*60)
+- res_datetime = Time.parse(reservation['res_datetime'])
+- needs_conf = !reservation['reconfirmed'] && res_datetime < Time.now + (12*60*60)
 .level
   .card.is-fullwidth
     = render 'reservation_header', reservation: reservation
@@ -12,7 +13,7 @@
           %label.label Vehicle Type
           %p.control
             = reservation['res_veh_type']
-          - if reservation['res_datetime'] < Time.now + (2*60*60)
+          - if res_datetime < Time.now + (2*60*60)
             = render 'client_info', reservation: reservation
           %label.label Pickup Address
           %p.control
