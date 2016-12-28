@@ -32,4 +32,6 @@
           %label.label Pre-Paid
           %p.control
             = reservation['res_prepaid'] != '0' ? 'Yes' : 'No'
+          - unless reservation['res_arr_status'].blank?
+            = render 'flight_status', reservation: reservation
           = render 'actions', reservation: reservation
