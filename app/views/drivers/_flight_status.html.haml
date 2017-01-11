@@ -1,2 +1,14 @@
-.notification.is-info
-  = "Last known status of this flight is #{reservation['res_arr_status']} #{reservation['res_arr_time']}"
+- @dateTime = DateTime.parse(reservation['res_arr_time']).strftime('%l:%M %p').strip
+- case reservation['res_arr_status']
+- when "Scheduled"
+  .notification
+    = "Flight is currently scheduled to arrive at #{@dateTime}."
+- when "Active"
+  .notification.is-info
+    = "Flight is in the air and scheduled to arrive at #{@dateTime}."
+- when "Landed"
+  .notification.is-success
+    = "Flight landed at #{@dateTime}."
+- when /Canceled|Diverted|Not Operational|Redirected/
+  .notification.is-danger
+    = "This flight appears to be #{reservation['res_arr_status'].downcase}. Please confirm with your passenger or airline."
