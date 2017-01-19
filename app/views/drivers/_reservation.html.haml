@@ -1,4 +1,4 @@
-- res_datetime = Time.parse(reservation['res_arr_time'] || reservation['res_datetime'])
+- res_datetime = parse_time(reservation)
 - needs_conf = !reservation['reconfirmed'] && res_datetime < Time.now + (12*60*60)
 .level
   .card.is-fullwidth
