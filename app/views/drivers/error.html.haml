@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=320, initial-scale=1, user-scalable=no", :name => "viewport"}/
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.1/css/bulma.css", :rel => "stylesheet"}/
+    %link{:href => "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css", :rel => "stylesheet"}
+    %script{:crossorigin => "anonymous", :integrity => "sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=", :src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+    %title Driver Page
+  %body
+    .section
+      %nav.level.is-mobile
+        %p.level-item.has-text-left
+          %strong Aces Town Car Service
+      %p.level-item.has-text-centered
+        = render 'error_message'
+      %nav.level.is-mobile
+        %p.level-item.has-text-centered
+          %a.link.is-info.terms-and-conditions Terms and Conditions
+    = render 'terms'
+    = render 'timeout'
