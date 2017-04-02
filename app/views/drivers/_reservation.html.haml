@@ -23,9 +23,13 @@
             = reservation['res_drop']
           - unless reservation['res_airline'].blank?
             = render 'flight_info', reservation: reservation
-          %label.label Notes
+          %label.label Passenger Notes
           %p.control
             = reservation['res_notes'].html_safe
+          - unless reservation['res_priv_notes'].blank?
+            %label.label Dispatch Notes
+            %p.control
+              = reservation['res_priv_notes'].html_safe
           %label.label Base Charge
           %p.control
             = '$' + reservation['res_price']
